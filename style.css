@@ -37,3 +37,17 @@
 html {
     scroll-behavior: smooth;
 }
+
+/* Inside your new style.css */
+body {
+    background: linear-gradient(135deg, #f0b4f9, #d7a0bf, #cfb8d0);
+    font-family: Arial;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
