@@ -1,0 +1,39 @@
+/* Singing Section Image */
+.service-img-large {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Service Card Layout */
+.service-card {
+    background: white;
+    border-radius: 25px;
+    border: 1px solid #eee;
+    transition: 0.3s ease;
+}
+
+/* Project Boxes */
+.project-box {
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #eee;
+    transition: 0.3s ease;
+}
+
+.project-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.project-preview {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Global Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}

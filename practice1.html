@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>📚 Lumos Learning Official Store 📚</title>
+
+<style>
+/* HARRY POTTER THEME COLORS */
+:root{
+      --accent:#740001; 
+      --bg:#fcf8e5; 
+      --card:#ffffff; 
+      --accent-light:#D3A625; 
+      --aurora1:#946B2D; 
+      --aurora2:#740001; 
+      --aurora3:#D3A625; 
+      --text-color: #333333;
+}
+
+body{
+  margin:0;
+  font-family:'Times New Roman', Times, serif; 
+  background:var(--bg);
+  color:var(--text-color);
+}
+
+/* HEADER STYLES */
+header{
+  background:linear-gradient(90deg, var(--aurora2), var(--aurora3));
+  color:#fff;
+  padding:1.2rem 0;
+  box-shadow:0 4px 12px rgba(0,0,0,0.4); 
+  border-bottom:3px solid var(--accent-light);
+}
+
+.topbar{
+  max-width:1200px;
+  margin:auto;
+  padding:0 1rem;
+  display:flex;
+  align-items:center;
+  gap:1.5rem; 
+}
+
+.brand{
+  font-size:2.2rem;
+  font-weight:700;
+  color:#fff;
+  line-height:1.3;
+  white-space:nowrap;
+  text-shadow: 1px 1px 2px #000;
+}
+
+nav{
+  margin-right: auto;
+  display:flex;
+  gap:2.2rem;
+  align-items:center;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  font-size:1.1rem;
+  font-weight:600;
+  white-space:nowrap;
+  transition:.3s;
+}
+
+nav a:hover{
+  color:var(--text-color);
+  background:#fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.search{
+  display:flex;
+  align-items:center;
+  gap:.6rem;
+}
+
+.search input{
+  padding:.6rem .9rem;
+  border-radius:12px;
+  border:0;
+  min-width:220px;
+  font-size:1rem;
+}
+
+.search button{
+  padding:.6rem .9rem;
+  border-radius:12px;
+  border:0;
+  background:var(--accent-light); 
+  color:var(--accent); 
+  font-weight:700;
+  font-size:1rem;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.search button:hover{
+  background:var(--accent);
+  color:#fff;
+}
+
+/* PROFILE AND CART ICONS */
+#profileIcon{
+    display:none; /* Itago muna, ipakita lang pag naka-login */
+    cursor:pointer;
+    margin-left:1rem;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--accent-light); /* Gold border */
+}
+
+#profileIcon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#cartIcon{
+  cursor:pointer;
+  margin-left:1rem;
+  font-size:1.5rem;
+  color: var(--accent-light); 
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* LOGIN LINK */
+#loginLink {
+    display: block; /* Ipakita muna, itatago pag naka-login */
+}
+
+/* MAIN CONTENT STYLES */
+h1{text-align:center;margin-top:30px; color:var(--accent);}
+h2{color:var(--accent); text-align:center;}
+
+.grid{
+  max-width:1000px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  padding:20px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:15px;
+  box-shadow:0 3px 8px rgba(0,0,0,.2);
+}
+
+.card button{
+  padding:10px;
+  width:100%;
+  border:0;
+  background:var(--accent); 
+  color:#fff;
+  border-radius:10px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+/* CART DRAWER */
+#cartDrawer{
+  position:fixed;
+  top:0;
+  right:-350px;
+  width:350px;
+  height:100%;
+  background:#fff;
+  box-shadow:-2px 0 10px rgba(0,0,0,.3);
+  transition:.4s;
+  padding:20px;
+  overflow-y:auto;
+  z-index:999;
+}
+
+#cartDrawer.open{
+  right:0;
+}
+
+.cart-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.cart-item button{
+    width:auto;
+    padding:5px 10px;
+    margin-left:10px;
+    background: #ff5e5e;
+}
+
+/* FORM STYLES */
+input,button{
+  font-size:16px;
+  padding:10px;
+  width:100%;
+  box-sizing:border-box;
+}
+
+.form-box{
+  width:90%;
+  max-width:400px;
+  margin:20px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+.form-box button {
+    cursor:pointer;
+    background: var(--accent);
+    color:#fff;
+    margin-top:15px;
+}
+
+/* ===== HOMEPAGE STYLES ===== */
+.homepage-container{
+    max-width:1200px;
+    margin:20px auto;
+    padding: 0 20px;
+}
+
+.hero-box{
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.1);
+    border:5px solid transparent; 
+    border-image: linear-gradient(to right, var(--aurora2), var(--aurora3)) 1; 
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.hero-text{
+    padding:40px;
+    flex:1 1 50%; 
+    min-width: 300px; 
+}
+
+.hero-text h2{
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    color: var(--accent); 
+}
+
+.hero-text p.quote{
+    color: var(--accent-light); 
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+.hero-image{
+    flex:1 1 40%;
+    min-width: 250px;
+}
+
+.hero-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* About Section Cards */
+.about-cards-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.about-card{
+    background: var(--card);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.about-card h3{
+    color: var(--accent);
+    font-size: 1.4rem;
+    margin-top: 0;
+}
+
+/* TUTOR STYLES */
+.tutor-card-grid{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    padding-bottom: 30px;
+    flex-wrap: wrap; 
+}
+
+.tutor-profile{
+    background: var(--card);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 300px;
+    min-width: 250px; 
+}
+
+.tutor-profile img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid var(--accent-light); 
+}
+
+.tutor-profile h3{
+    color: var(--accent); 
+    margin-bottom: 5px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="topbar">
+    <div class="brand">⚯ ͛  Lumos Learning</div>
+
+    <nav>
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('shop')">Shop</a>
+      <a href="#" id="loginLink" onclick="showPage('login')">Login</a>
+      <a href="#" onclick="showPage('checkout')">Checkout</a>
+    </nav>
+
+    <div class="search">
+      <input placeholder="Search products...">
+      <button>Search</button>
+    </div>
+    
+    <div id="profileIcon" onclick="logout()">
+        <img src="https://i.pinimg.com/736x/8a/f7/b5/8af7b51236d65265ed84dc50a99f63fb.jpg" alt="User Profile Icon">
+    </div>
+
+    <div id="cartIcon" onclick="toggleCart()">🛒 <span id="cartCount">0</span></div>
+  </div>
+</header>
+
+<div id="home" class="page">
+  <div class="homepage-container">
+    
+    <div class="hero-box">
+        <div class="hero-text">
+            <h2>Welcome to Lumos Learning</h2>
+            <p class="quote">"Light Learning: Your space to explore, learn, and succeed."</p>
+            <p>Your official educational website with modules, books, and student resources.</p>
+            <a href="#tutors" style="color:var(--accent); text-decoration:none;">Meet our Tutors →</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://contentful.harrypotter.com/usf1vwtuqyxm/4VcPqGNA3SMkW6sk6UookA/0635f76dc4ebd019b0f4764c980d0ea4/B1C8M2.jpg?q=75&fm=webp&w=914" alt="Students studying together">
+        </div>
+    </div>
+
+    <h2 id="about" style="margin-top:40px; text-align:center;">About</h2>
+    
+    <div class="about-cards-grid">
+        <div class="about-card">
+            <h3>Company Overview</h3>
+            <p>We build educational systems and e-learning tools.</p>
+        </div>
+        <div class="about-card">
+            <h3>Our Mission</h3>
+            <p>To make learning simple and accessible.</p>
+        </div>
+        <div class="about-card">
+            <h3>Services</h3>
+            <p>Modules, tutoring, digital resources.</p>
+        </div>
+    </div>
+
+    <h2 id="tutors" style="margin-top:40px; text-align:center;">Our Featured Tutors</h2>
+
+    <div class="tutor-card-grid">
+        
+        <div class="tutor-profile">
+            <img 
+                src="https://i.pinimg.com/736x/f5/ca/76/f5ca76453e594e19ecc648174182c896.jpg" 
+                alt="Profile picture of Mr. Albus Percival Dumbledore"
+            >
+            <h3>Mr. Albus Percival Dumbledore</h3>
+            <p><strong>Available Schedule:</strong></p>
+            <ul>
+                <li>Monday: 9:00 AM - 12:00 PM</li>
+                <li>Wednesday: 1:00 PM - 4:00 PM</li>
+                <li>Friday: 9:00 AM - 11:00 AM</li>
+            </ul>
+        </div>
+        
+        <div class="tutor-profile">
+            <img 
+                src="https://i.pinimg.com/736x/ad/1f/8c/ad1f8ce4bc8b48346cf7534831f216f1.jpg" 
+                alt="Profile picture of Ms. Minerva McGonagall"
+            >
+            <h3>Ms. Minerva McGonagall</h3>
+            <p><strong>Available Schedule:</strong></p>
+            <ul>
+                <li>Tuesday: 9:00 AM - 12:00 PM</li>
+                <li>Wednesday: 1:00 PM - 4:00 PM</li>
+                <li>Friday: 9:00 AM - 11:00 AM</li>
+            </ul>
+        </div>
+        
+        <div class="tutor-profile">
+            <img 
+                src="https://i.pinimg.com/736x/69/f3/98/69f3988cbb26821502d3ce5ee26c859b.jpg" 
+                alt="Profile picture of Mr. Severus Snape"
+            >
+            <h3>Mr. Severus Snape </h3>
+            <p><strong>Available Schedule:</strong></p>
+            <ul>
+                <li>Monday: 9:00 AM - 12:00 PM</li>
+                <li>Thursday: 1:00 PM - 4:00 PM</li>
+                <li>Saturday: 9:00 AM - 11:00 AM</li>
+            </ul>
+        </div>
+
+        <div class="tutor-profile">
+            <img 
+                src="https://i.pinimg.com/736x/fe/e2/c3/fee2c38caead1a7861aefa78da5aa9f1.jpg" 
+                alt="Profile picture of Mr. Filius Flitwick"
+            >
+            <h3>Mr. Filius Flitwick </h3>
+            <p><strong>Available Schedule:</strong></p>
+            <ul>
+                <li>Tuesday: 9:00 AM - 12:00 PM</li>
+                <li>Thursday: 1:00 PM - 4:00 PM</li>
+                <li>Sunday: 2:00 PM - 5:00 PM</li>
+            </ul>
+        </div>
+        
+        <div class="tutor-profile">
+            <img 
+                src="https://i.pinimg.com/736x/a1/1d/35/a11d3554e38ce750a83d590794a15688.jpg" 
+                alt="Profile picture of Professor Horace Slughorn"
+            >
+            <h3>Mr. Horace Slughorn </h3>
+            <p><strong>Available Schedule:</strong></p>
+            <ul>
+                <li>Monday: 4:00 PM - 6:00 PM</li>
+                <li>Wednesday: 9:00 AM - 11:00 AM</li>
+                <li>Saturday: 1:00 PM - 3:00 PM</li>
+            </ul>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="shop" class="page" style="display:none;">
+  <h1>Bookstore</h1>
+  <div class="grid">
+
+    <div class="card">
+      <h3>Reading Module A</h3>
+      <p>₱120</p>
+      <button onclick="addToCart('Reading Module A',120)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Math Workbook (Kids)</h3>
+      <p>₱95</p>
+      <button onclick="addToCart('Math Workbook (Kids)',95)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>English Mastery (Teens)</h3>
+      <p>₱150</p>
+      <button onclick="addToCart('English Mastery (Teens)',150)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Science Essentials</h3>
+      <p>₱180</p>
+      <button onclick="addToCart('Science Essentials',180)">Add to Cart</button>
+    </div>
+    
+    <div class="card">
+      <h3>Advanced Transfiguration Textbook</h3>
+      <p>₱350</p>
+      <p style="font-size: 0.9em; color: var(--accent);">Recommended by Dumbledore/McGonagall</p>
+      <button onclick="addToCart('Advanced Transfiguration Textbook',350)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Beginner Transfiguration Guide</h3>
+      <p>₱280</p>
+      <p style="font-size: 0.9em; color: var(--accent);">Recommended by McGonagall</p>
+      <button onclick="addToCart('Beginner Transfiguration Guide',280)">Add to Cart</button>
+    </div>
+    
+    <div class="card">
+      <h3>Potions Mastery: Grade 7</h3>
+      <p>₱420</p>
+      <p style="font-size: 0.9em; color: var(--accent);">Recommended by Snape</p>
+      <button onclick="addToCart('Potions Mastery: Grade 7',420)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Potions: Intermediate Level Guide</h3>
+      <p>₱300</p>
+      <p style="font-size: 0.9em; color: var(--accent);">Recommended by Slughorn</p>
+      <button onclick="addToCart('Potions: Intermediate Level Guide',300)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Charms: Levitation Spells Manual</h3>
+      <p>₱250</p>
+      <p style="font-size: 0.9em; color: var(--accent);">Recommended by Flitwick</p>
+      <button onclick="addToCart('Charms: Levitation Spells Manual',250)">Add to Cart</button>
+    </div>
+    
+    <div class="card">
+      <h3>Introduction to Dark Arts Defense</h3>
+      <p>₱380</p>
+      <p style="font-size: 0.9em; color: var(--accent);">Recommended by Snape</p>
+      <button onclick="addToCart('Introduction to Dark Arts Defense',380)">Add to Cart</button>
+    </div>
+
+      <div class="card">
+      <h3>Snape&rsquo;s Potion Secrets</h3>
+      <p>₱450</p>
+      <p style="font-size: 0.9em; color: var(--accent);">By Severus Snape</p>
+      <button onclick="addToCart('Snape\'s Potion Secrets',450)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Flitwick&rsquo;s Charm Compendium</h3>
+      <p>₱280</p>
+      <p style="font-size: 0.9em; color: var(--accent);">By Filius Flitwick</p>
+      <button onclick="addToCart('Flitwick\'s Charm Compendium',280)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <h3>Slughorn&rsquo;s Potions Handbook</h3>
+      <p>₱400</p>
+      <p style="font-size: 0.9em; color: var(--accent);">By Horace Slughorn</p>
+      <button onclick="addToCart('Slughorn\'s Potions Handbook',400)">Add to Cart</button>
+    </div>
+
+  </div>
+</div>
+
+  </div>
+</div>
+
+<div id="login" class="page" style="display:none;">
+  <h1>Login</h1>
+
+  <div class="form-box">
+    <input id="loginUser" placeholder="Username">
+    <input id="loginPass" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+
+    <p style="text-align:center;margin-top:10px;">No account?  
+      <a href="#" onclick="showPage('register')" style="color:var(--accent);">Register</a>
+    </p>
+  </div>
+</div>
+
+<div id="register" class="page" style="display:none;">
+  <h1>Register</h1>
+
+  <div class="form-box">
+    <input id="regUser" placeholder="Username">
+    <input id="regPass" type="password" placeholder="Password">
+    <button onclick="register()">Create Account</button>
+  </div>
+</div>
+
+<div id="checkout" class="page" style="display:none;">
+  <h1>Checkout</h1>
+
+  <div id="checkoutList" class="form-box">
+    </div>
+  <div class="form-box">
+    <h2>Shipping Details</h2>
+    <input placeholder="Full Name">
+    <input placeholder="Address">
+    <input placeholder="Phone Number">
+    <button onclick="placeOrder()">Place Order</button>
+  </div>
+</div>
+
+<div id="cartDrawer">
+  <h2>Your Cart</h2>
+  <div id="cartItems"></div>
+  <h3>Total: ₱<span id="cartTotal">0</span></h3>
+  <button onclick="showPage('checkout');toggleCart()">Proceed to Checkout</button>
+</div>
+
+<script>
+const CART_KEY="lumos_cart";
+const USERS_KEY="lumos_users"; 
+
+let cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+let users = JSON.parse(localStorage.getItem(USERS_KEY)) || {
+    'user': 'pass' // Default user for testing
+}; 
+
+let isLoggedIn = false;
+
+// Function para i-update ang header state (Login link o Profile Icon)
+function updateHeaderState() {
+    const loginLink = document.getElementById('loginLink');
+    const profileIcon = document.getElementById('profileIcon');
+    
+    if (isLoggedIn) {
+        // Kapag naka-login: itago ang Login link, ipakita ang Profile Icon
+        loginLink.style.display = 'none';
+        profileIcon.style.display = 'block'; 
+    } else {
+        // Kapag naka-logout: ipakita ang Login link, itago ang Profile Icon
+        loginLink.style.display = 'block';
+        profileIcon.style.display = 'none';
+    }
+}
+
+// --- PAGE NAVIGATION ---
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(page => {
+        page.style.display = 'none';
+    });
+    
+    document.getElementById(pageId).style.display = 'block';
+
+    if (pageId === 'checkout') {
+        renderCheckoutList();
+    }
+}
+
+// --- CART LOGIC ---
+function toggleCart() {
+    const cartDrawer = document.getElementById('cartDrawer');
+    cartDrawer.classList.toggle('open');
+    if (cartDrawer.classList.contains('open')) {
+        updateCart();
+    }
+}
+
+function updateCart() {
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartCountEl = document.getElementById('cartCount');
+    let total = 0;
+
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    
+    cartItemsEl.innerHTML = ''; 
+
+    cart.forEach((item, index) => {
+        total += item.price; 
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item';
+        itemEl.innerHTML = `
+            <span>${item.name} (₱${item.price.toFixed(2)})</span>
+            <button onclick="removeFromCart(${index})">Remove</button>
+        `;
+        cartItemsEl.appendChild(itemEl);
+    });
+
+    document.getElementById('cartTotal').textContent = total.toFixed(2);
+    cartCountEl.textContent = cart.length;
+}
+
+function addToCart(name, price) {
+    cart.push({ name: name, price: price });
+    updateCart();
+    alert(`"${name}" added to cart!`);
+}
+
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCart();
+}
+
+// --- CHECKOUT LOGIC ---
+function renderCheckoutList() {
+    const checkoutListEl = document.getElementById('checkoutList');
+    let total = 0;
+    
+    if (cart.length === 0) {
+        checkoutListEl.innerHTML = '<h2>Order Summary</h2><p style="text-align:center; padding: 10px;">Your cart is empty.</p>';
+        return;
+    }
+
+    let summaryHTML = '<h2>Order Summary</h2>';
+
+    cart.forEach(item => {
+        total += item.price;
+        summaryHTML += `<p>${item.name} - ₱${item.price.toFixed(2)}</p>`;
+    });
+
+    summaryHTML += `<h3>Subtotal: ₱${total.toFixed(2)}</h3>`;
+    checkoutListEl.innerHTML = summaryHTML;
+}
+
+function placeOrder() {
+    if (cart.length === 0) {
+        alert("Your cart is empty. Please add items before placing an order.");
+        return;
+    }
+
+    if (!isLoggedIn) {
+        alert("Please log in or register before placing an order.");
+        showPage('login');
+        return;
+    }
+
+    const orderTotal = document.getElementById('cartTotal').textContent;
+    alert(`Order placed successfully! Total amount: ₱${orderTotal}. Thank you!`);
+
+    cart = [];
+    localStorage.removeItem(CART_KEY);
+    updateCart(); 
+    showPage('home');
+}
+
+// --- USER AUTHENTICATION ---
+function login() {
+    const user = document.getElementById('loginUser').value.trim();
+    const pass = document.getElementById('loginPass').value;
+
+    if (users[user] && users[user] === pass) { 
+        isLoggedIn = true;
+        alert("Login Successful! Welcome back, " + user + ".");
+        
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
+        updateHeaderState(); // Ipakita ang profile icon
+        showPage('home');
+    } else {
+        alert("Login Failed. Check your username and password.");
+    }
+}
+
+function logout() {
+    isLoggedIn = false;
+    alert("You have been logged out.");
+    updateHeaderState(); // Itago ang profile icon, ipakita ang login link
+    showPage('home');
+}
+
+function register() {
+    const user = document.getElementById('regUser').value.trim();
+    const pass = document.getElementById('regPass').value;
+
+    if (!user || !pass || pass.length < 4) {
+        alert("Registration Failed. Please enter a valid username and a password with at least 4 characters.");
+        return;
+    }
+
+    if (users[user]) {
+        alert(`Registration Failed. The username "${user}" is already taken.`);
+        return;
+    }
+    
+    users[user] = pass;
+    localStorage.setItem(USERS_KEY, JSON.stringify(users));
+
+    alert(`Account created for ${user}! You can now login.`);
+    
+    document.getElementById('regUser').value = '';
+    document.getElementById('regPass').value = '';
+    showPage('login');
+}
+
+// Initial calls
+document.addEventListener('DOMContentLoaded', () => {
+    updateCart();
+    showPage('home');
+    updateHeaderState(); // I-set ang initial state ng header (dapat Login link ang makita)
+});
+</script>
+</body>
+</html>

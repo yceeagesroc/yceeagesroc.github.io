@@ -1,0 +1,18 @@
+/* Custom Styles for BTS Archive */
+
+body { 
+    font-family: 'Inter', sans-serif; 
+}
+
+/* Background gradient for the header */
+.purple-gradient { 
+    background: linear-gradient(135deg, #510e6b 0%, #b946eec1 100%); 
+}
+
+/* Frosted glass effect for the music cards */
+.glass { 
+    background: rgba(202, 45, 238, 0.705); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); /* Support for Safari */
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+}

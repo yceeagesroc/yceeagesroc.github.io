@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTS World | Discography</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-black text-white min-h-screen">
+
+    <nav class="p-6 flex justify-between items-center border-b border-white/10">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-white flex items-center justify-center rounded-sm">
+                <div class="w-6 h-6 flex justify-between">
+                    <div class="w-2.5 h-full bg-black"></div>
+                    <div class="w-2.5 h-full bg-black"></div>
+                </div>
+            </div>
+            <span class="font-black text-2xl tracking-tighter italic">BTS ARCHIVE</span>
+        </div>
+        <div class="text-sm text-purple-400 font-bold tracking-widest">방탄소년단</div>
+    </nav>
+
+    <header class="py-20 px-6 text-center purple-gradient">
+        <h2 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter">DISCOGRAPHY</h2>
+        <p class="text-purple-200 max-w-lg mx-auto mb-10">Explore the musical journey of BTS.</p>
+        
+        <div class="max-w-xl mx-auto flex gap-2 p-2 bg-black/30 rounded-full border border-white/20">
+            <input type="text" id="searchInput" placeholder="Search song or album (e.g. Dynamite)..." 
+                class="bg-transparent flex-1 px-6 outline-none">
+            <button onclick="fetchBTS()" class="bg-white text-black px-8 py-3 rounded-full font-black hover:bg-purple-300 transition">SEARCH</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-10">
+        <div id="status" class="text-center text-gray-500 mb-10">Showing latest official releases...</div>
+        <div id="results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
