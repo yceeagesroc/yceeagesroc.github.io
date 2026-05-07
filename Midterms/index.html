@@ -6,42 +6,174 @@
     <title>BTS World | Discography</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Dito ko na isinama yung style.css mo */
+        body { font-family: 'Inter', sans-serif; transition: all 0.3s ease; }
+        
+        /* Dark Mode (Default) */
+        .purple-gradient { background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 100%); transition: background 0.3s ease; }
+        
+        .glass { 
+            background: rgba(202, 45, 238, 0.1); 
+            backdrop-filter: blur(10px); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+        }
+
+        /* Light Mode Styles */
+        body.light-mode { background-color: #f3f4f6; color: #1f2937; }
+        .light-mode .purple-gradient { background: linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%); }
+        .light-mode nav { border-color: rgba(0, 0, 0, 0.1); }
+        .light-mode .text-purple-400 { color: #6d28d9; }
+        .light-mode .text-purple-200 { color: #f3f4f6; }
+        .light-mode .bg-black\/30 { background-color: rgba(255, 255, 255, 0.5); }
+        .light-mode #searchInput { color: #111827; }
+        .light-mode #searchInput::placeholder { color: #6b7280; }
+        .light-mode .border-white\/20 { border-color: rgba(0, 0, 0, 0.1); }
+        
+        .light-mode .glass { 
+            background: rgba(255, 255, 255, 0.9); 
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Audio Player Styling */
+        audio::-webkit-media-controls-panel {
+            background-color: #a78bfa;
+        }
+    </style>
 </head>
 <body class="bg-black text-white min-h-screen">
 
     <nav class="p-6 flex justify-between items-center border-b border-white/10">
         <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-white flex items-center justify-center rounded-sm">
+            <div id="logo-container" class="w-10 h-10 bg-white flex items-center justify-center rounded-sm transition-colors">
                 <div class="w-6 h-6 flex justify-between">
-                    <div class="w-2.5 h-full bg-black"></div>
-                    <div class="w-2.5 h-full bg-black"></div>
+                    <div id="logo-bar-1" class="w-2.5 h-full bg-black"></div>
+                    <div id="logo-bar-2" class="w-2.5 h-full bg-black"></div>
                 </div>
             </div>
             <span class="font-black text-2xl tracking-tighter italic">BTS ARCHIVE</span>
         </div>
-        <div class="text-sm text-purple-400 font-bold tracking-widest">방탄소년단</div>
+
+        <div class="flex items-center gap-4">
+            <div class="text-sm text-purple-400 font-bold tracking-widest hidden sm:block">방탄소년단</div>
+            <button onclick="toggleTheme()" class="p-2 rounded-full border border-white/20 hover:bg-white/10 transition active:scale-90">
+                <span id="theme-icon" class="text-xl">🌙</span>
+            </button>
+        </div>
     </nav>
 
     <header class="py-20 px-6 text-center purple-gradient">
-        <h2 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter">DISCOGRAPHY</h2>
+        <h2 class="text-6xl md:text-8xl font-black mb-4 tracking-tighter text-white">DISCOGRAPHY</h2>
         <p class="text-purple-200 max-w-lg mx-auto mb-10">Explore the musical journey of BTS.</p>
         
-        <div class="max-w-xl mx-auto flex gap-2 p-2 bg-black/30 rounded-full border border-white/20">
+        <div class="max-w-xl mx-auto flex gap-2 p-2 bg-black/30 rounded-full border border-white/20 shadow-lg">
             <input type="text" id="searchInput" placeholder="Search song or album (e.g. Dynamite)..." 
-                class="bg-transparent flex-1 px-6 outline-none">
+                class="bg-transparent flex-1 px-6 outline-none text-white">
             <button onclick="fetchBTS()" class="bg-white text-black px-8 py-3 rounded-full font-black hover:bg-purple-300 transition">SEARCH</button>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto p-10">
-        <div id="status" class="text-center text-gray-500 mb-10">Showing latest official releases...</div>
+        <div id="status" class="text-center text-gray-500 mb-10 italic">Showing latest official releases...</div>
         <div id="results" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             </div>
     </main>
 
-    <script src="script.js"></script>
+    <script>
+        // --- Theme Logic ---
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const logoContainer = document.getElementById('logo-container');
+            const bar1 = document.getElementById('logo-bar-1');
+            const bar2 = document.getElementById('logo-bar-2');
+
+            body.classList.toggle('light-mode');
+
+            if (body.classList.contains('light-mode')) {
+                themeIcon.innerText = '☀️';
+                logoContainer.style.backgroundColor = 'black';
+                bar1.style.backgroundColor = 'white';
+                bar2.style.backgroundColor = 'white';
+            } else {
+                themeIcon.innerText = '🌙';
+                logoContainer.style.backgroundColor = 'white';
+                bar1.style.backgroundColor = 'black';
+                bar2.style.backgroundColor = 'black';
+            }
+        }
+
+        // --- Fetch Logic (Inlined for reliability) ---
+        async function fetchBTS() {
+            const searchInput = document.getElementById('searchInput');
+            const resultsContainer = document.getElementById('results');
+            const status = document.getElementById('status');
+            
+            const query = (searchInput && searchInput.value.trim()) || 'BTS';
+            
+            if (status) status.innerText = "Loading the archives...";
+            if (resultsContainer) resultsContainer.innerHTML = ''; 
+
+            try {
+                // Must be HTTPS for GitHub Pages
+                const url = `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=20`;
+                
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (!data.results || data.results.length === 0) {
+                    if (status) status.innerText = "No tracks found. Try 'Butter' or 'Be'.";
+                    return;
+                }
+
+                if (status) status.innerText = `Found ${data.resultCount} results for "${query}"`;
+
+                const cardsHTML = data.results.map(track => {
+                    const hiresArt = track.artworkUrl100.replace('100x100bb', '600x600bb');
+                    const releaseYear = new Date(track.releaseDate).getFullYear();
+
+                    return `
+                        <div class="glass rounded-2xl overflow-hidden hover:scale-105 transition-all duration-300 group flex flex-col h-full">
+                            <div class="relative overflow-hidden">
+                                <img src="${hiresArt}" alt="${track.trackName}" class="w-full aspect-square object-cover">
+                                <div class="absolute inset-0 bg-purple-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                     <a href="${track.trackViewUrl}" target="_blank" class="bg-white text-black px-4 py-2 rounded-full font-bold text-xs">VIEW ON ITUNES</a>
+                                </div>
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <h3 class="font-black text-lg truncate mb-1" title="${track.trackName}">${track.trackName}</h3>
+                                <p class="text-purple-400 text-sm truncate mb-4">${track.collectionName}</p>
+                                <div class="mt-auto pt-4 flex flex-col gap-2">
+                                    <span class="text-xs text-gray-500">${releaseYear}</span>
+                                    ${track.previewUrl ? `
+                                        <audio controls class="h-8 w-full opacity-70 hover:opacity-100">
+                                            <source src="${track.previewUrl}" type="audio/mpeg">
+                                        </audio>
+                                    ` : '<span class="text-xs italic text-gray-400 text-center">No preview available</span>'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                resultsContainer.innerHTML = cardsHTML;
+
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                if (status) status.innerText = "Connection error. Please refresh.";
+            }
+        }
+
+        // Run fetch on load
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchBTS();
+            const input = document.getElementById('searchInput');
+            if (input) input.addEventListener('keypress', (e) => { if (e.key === 'Enter') fetchBTS(); });
+        });
+    </script>
 </body>
 </html>
