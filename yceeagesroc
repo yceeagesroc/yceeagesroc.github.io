@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joycee Corsega | Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            color: #333;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+        }
+        .profile-img {
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            border: 1px solid white;
+            transition: 0.3s;
+        }
+        .project-box {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: none;
+        }
+        .project-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .project-preview {
+            height: 180px;
+            object-fit: cover;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #2ad3d5;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container py-5">
+    <div class="row g-4">
+        
+        <div class="col-lg-3">
+            <div class="glass-card text-center p-4">
+                <img src="jycee3.jpg" style="width:150px; height:150px;" alt="Profile" class="profile-img mb-3">
+                <h2 class="fw-bold h4">Joycee Corsega</h2>
+                <span class="badge bg-light text-dark mb-4 px-3 py-2 shadow-sm">DIT Student (2-1)</span>
+                
+                <div class="text-start mt-4">
+                    <p class="mb-1"><small class="text-muted fw-bold">EMAIL</small></p>
+                    <p class="small">yceeagesroc@gmail.com</p>
+                    <p class="mb-1"><small class="text-muted fw-bold">LOCATION</small></p>
+                    <p class="small">Batangas, Philippines</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="glass-card p-5">
+                
+                <ul class="nav nav-pills justify-content-end mb-4">
+                    <li class="nav-item"><a class="nav-link active" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#featured">Featured</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Projects</a></li>
+                </ul>
+
+                <h2 class="fw-bold mb-4 border-bottom pb-2">About Me</h2>
+                <p class="text-muted">I am a DIT student with a deep passion for music. When I'm not studying technology, you'll find me singing and exploring different musical genres. I believe that creativity in music helps me become a better problem-solver in IT.</p>
+
+                <h3 id="featured" class="fw-bold mt-5 mb-4 border-bottom pb-2">Featured Projects</h3>
+                <div class="row g-4 mb-5">
+                    
+                    <div class="col-12">
+                        <div class="project-box p-4 shadow-sm border-0" style="border-left: 6px solid #2ad3d5 !important; background: rgba(255,255,255,0.8);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-3">
+                                    <span style="font-size: 2rem;">📂</span>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Midterm Activity Repository</h5>
+                                    <p class="text-muted small mb-3">Access all my latest web development activities and midterms project here.</p>
+                                    <a href="https://yceeagesroc.github.io/ycee-midterms/" target="_blank" class="fw-bold" style="color: #2ad3d5;">
+                                        Open Midterms Repository →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="project-box p-4 shadow-sm border-0" style="border-left: 6px solid #333 !important; background: rgba(255,255,255,0.8);">
+                            <div class="d-flex align-items-start">
+                                <div class="me-3">
+                                    <span style="font-size: 2rem;">🌐</span>
+                                </div>
+                                <div>
+                                    <h5 class="fw-bold mb-1">Activity 02: Hardware Showcase</h5>
+                                    <p class="text-muted small mb-3">Explore the NEXUS VR-X Community page featuring immersive tech showcase and Weverse-inspired UI.</p>
+                                    <a href="https://yceeagesroc.github.io/A02.html" target="_blank" class="fw-bold text-dark">
+                                        Launch Activity Page →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h3 class="fw-bold mt-5 mb-4">What I do</h3>
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="service-card p-4 d-flex align-items-center"> 
+                            <div class="me-4" style="width:120px;">
+                                <img src="jycee....jpg" alt="Singing" class="img-fluid rounded shadow-sm">
+                            </div>
+                            <div>
+                                <h4 class="fw-bold mb-1">I Sing</h4>
+                                <p class="text-muted mb-0">I am a passionate singer and music enthusiast. Music is a huge part of my daily life and my primary creative outlet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 id="portfolio" class="fw-bold mt-5 mb-4">Software Projects</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="project-box shadow-sm h-100">
+                            <img src="student-system.jpg" alt="Student System" class="w-100 project-preview">
+                            <div class="p-3">
+                                <h5 class="fw-bold mb-1">Student System</h5>
+                                <p class="small text-muted">A PHP and MySQL based platform for student management.</p>
+                                <a href="https://github.com/yceeagesroc/Student-System" target="_blank" class="btn btn-sm btn-outline-dark mt-2">View Repo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="project-box shadow-sm h-100">
+                            <div class="p-4 text-center">
+                                <h5 class="fw-bold mb-1">Lumos Learning</h5>
+                                <p class="small text-muted">Java desktop application utilizing Swing GUI for education.</p>
+                                <div class="d-grid gap-2 mt-3">
+                                    <a href="practice1.html" class="btn btn-sm btn-primary">Go to Website</a>
+                                    <a href="#" class="btn btn-sm btn-outline-secondary">View Repo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
